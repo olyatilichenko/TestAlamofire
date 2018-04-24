@@ -28,4 +28,17 @@ struct Video {
         self.description = description
         self.thumbnail_image_name = thumbnail_image_name
     }
+    
+    static func getArray(from jsonArray: Any) -> [Video]? {
+        
+        guard let jsonArray = jsonArray as? Array<[String: Any]> else { return nil }
+        var videos: [Video] = []
+        
+        for jsonObject in jsonArray {
+            if let post = Video(json: jsonObject) {
+                videos.append(post)
+            }
+        }
+        return videos
+    }
 }
